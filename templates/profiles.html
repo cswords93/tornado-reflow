@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Reflow Oven</title>
+	<meta charset="utf-8">
+	<script src = "{{static_url('scripts/profilesscript.js')}}"></script>
+	<script src = "{{static_url('scripts/graphscript.js')}}"></script>
+	<link rel="stylesheet" type="text/css" href="{{static_url('styles/mystyle.css')}}">
+</head>
+
+<body>
+<div class = "content">
+	
+	<div class = "banner">
+		<h1>Reflow Oven</h1>
+	</div>
+	
+	<div class = "mainDoc">
+		<div id = "errorsContainer" class="errorsContainer">
+			{% if request.method == "POST" %}
+				{% if errors %}
+					{% for name, error in errors.items() %}
+						<div class=error>
+							<span class = "errorTitle">
+								Error in {{name}} 
+							</span>
+							{% for e in error %}
+								<li class = "errorDetail">{{e}}</li>
+							{% end  %} 
+						</div>
+					{% end %}
+				{% end %}
+			{% end %}
+		</div>
+		
+		
+		
+		<div class = "panel graphPanel">
+			<div>
+				<object id = "svg-embed" 
+				data = "{{static_url('images/linegraph.svg')}}" 
+				type = "image/svg+xml" 
+				width="100%">
+				</object>
+			</div>
+		</div>
+	
+		<div class = "panel newProfilePanel">
+			<button onclick = "new_input()">New Input</button>
+			<button onclick = "delete_input()">Delete Input</button>
+			
+			<form id = "profile-form" method = "POST" action = "/profiles">
+				<span>Name:</span>
+				<input type = "text" name = "name"/>
+				
+				<span>Preheat:</span>
+				<input type = "text" id = "preheat" value = "0" 
+				name = "preheat" onchange = "inputChange()"/>
+				
+				<input type = "submit" value = "Save"/>
+				
+				<div class = "newProfileTableDiv">
+					<table class = "newProfileTable" id = "myNewProfileTable">
+						<tr>
+							<th>#</th>
+							<th>Time</th>
+							<th>Temperature</th>
+							<th>Rise</th>
+						</tr>
+					</table>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

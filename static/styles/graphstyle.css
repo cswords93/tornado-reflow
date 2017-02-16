@@ -1,0 +1,32 @@
+svg.graph {
+
+}
+
+.xlabels {
+	text-anchor:end;
+}
+
+.ylabels {
+	text-anchor:middle;
+}
+
+.ylabels-title {
+	writing-mode: tb;
+}
+
+.graph .grid {
+	stroke: black;
+	stroke-dasharry:0;
+	stroke-width: 1;
+}
+
+.graph .points{
+	stroke: black;
+	stroke-width: 2;
+}
+
+.paths{
+	stroke:black;
+	stroke-width:1;
+	stroke-dasharray:0;
+}

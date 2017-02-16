@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Reflow Oven</title>
+	<meta charset="utf-8">
+	<script src = "{{static_url('scripts/indexscript.js')}}"></script>
+	<script src = "{{static_url('scripts/socketscript.js')}}"></script>
+	<script src = "{{static_url('scripts/graphscript.js')}}"></script>
+	<link rel="stylesheet" type="text/css" href="{{static_url('styles/mystyle.css')}}">
+</head>
+
+<body>
+
+<div class="content">
+
+	<div class = "banner">
+		<h1>Reflow Oven</h1>
+	</div>
+	
+	<div class="mainDoc">
+		
+		<div class="panel graphPanel">
+			<div>
+				<object id = "svg-embed" 
+				data = "{{static_url('images/linegraph.svg')}}" 
+				type ="image/svg+xml" 
+				width="100%">
+				</object>
+			</div>
+		</div>
+		
+		<div class="panel controlPanel">
+			<div class="ovenProgress">
+				
+				<div id = "myProgress">
+					<div id = "myProgressBar"></div>
+				</div>
+				
+				<div class="statusTableDiv">
+					<table class = "statusTable" id="myStatusTable">
+						<tr>
+							<th>Temp</th>
+							<th>Target Temp</th>
+							<th>Time</th>
+							<th>Status</th>
+						</tr>
+						<tr>
+							<td><span class = "ovenStatus" 
+							id = "ovenTemperature">--</span>
+							</td>
+							
+							<td><span class = "ovenStatus" 
+							id = "ovenTargetTemperature">--</span>
+							</td>
+							
+							<td><span class = "ovenStatus" 
+							id = "ovenRunTime">--</span>
+							</td>
+							
+							<td><span class = "ovenStatus" 
+							id = "ovenState">--</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+			
+		<div class="panel actionPanel">
+			<div class="actionGroup oven">
+				<button class="actionButton" onclick="startOven()"> 
+					Start</button>
+				<button class="actionButton" type = "button" 
+				onclick = "stopOven()">Stop</button>
+			</div>
+			
+			<div class="actionGroup profile">
+				<button class="actionButton">Create Profile</button>
+				<button class="actionButton">Edit Profile</button>
+				<select class = "actionSelect" onchange = "loadProfile(this.value)" name = "select" 
+				id = "profile-select">
+				<option selected disabled></option>
+				{% for prof in profiles %}
+				<option value = {{prof}} >{{prof}}</option>
+				{% end %}
+				</select>
+			</div>
+		</div>
+		
+		
+		<div class="panel profilePanel">
+			<div class="profileTableDiv">
+				<table class = "profileTable" id = "my-table">
+					<tr>
+						<th>#</th>
+						<th>Time</th>
+						<th>Temperature</th>
+						<th>Rise</th>
+					</tr>
+				</table>
+			</div>
+			<span id = "duration">Duration</span>
+		</div>
+	</div>
+</div>
+</body>
+</html>
